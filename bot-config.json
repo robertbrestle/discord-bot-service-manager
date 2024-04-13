@@ -1,0 +1,31 @@
+{
+    "servers": [
+        {
+            "name": "Test 1",
+            "value": "test-1",
+            "description": "",
+            "type": "service",
+            "enabled": true
+        },
+        {
+            "name": "Test 2",
+            "value": "test-2",
+            "description": "",
+            "type": "service",
+            "enabled": false
+        },
+        {
+            "name": "Test 3",
+            "value": "test-3",
+            "description": "",
+            "type": "docker",
+            "enabled": true
+        }
+    ],
+    "actions": [
+        { "name": "Status", "value": "status", "successMessage": "" },
+        { "name": "Start", "value": "start", "successMessage": "started" },
+        { "name": "Stop", "value": "stop", "successMessage": "stopped" },
+        { "name": "Restart", "value": "restart", "successMessage": "restarted" }
+    ]
+}
