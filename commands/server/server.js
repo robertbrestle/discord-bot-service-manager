@@ -1,5 +1,10 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { servers, actions } = require('../../bot-config.json');
+
+var publicIp = null;
+import('public-ip')
+  .then((res) => { publicIp = res.publicIpv4 })
+  .catch((err) => { console.log(err); });
 
 const serviceHelper = require('../../service-helper.js');
 const dockerHelper = require('../../docker-helper.js');
@@ -20,11 +25,10 @@ module.exports = {
         .setName('action')
         .setDescription('Select an action for the game server')
         .setRequired(true)
-        .addChoices(...actions)),
+        .addChoices(...actions))
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .setDMPermission(false),
 	async execute(interaction) {
-
-    //interaction.options.get('game').choices = servers;
-
 		const game = interaction.options.getString('game');
     const action = interaction.options.getString('action');
 
@@ -50,6 +54,12 @@ module.exports = {
           result = 'Invalid server type.';
           break;
       }
+
+      // if start or status action, append IP + port
+      if (action === "start" || action === "status") {
+        result += `\nAddress:  **${await publicIp()}:${foundServers[0].port}**`;
+      }
+
       // edit the reply with the result
       await interaction.editReply(result);
     }

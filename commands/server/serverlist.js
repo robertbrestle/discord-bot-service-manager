@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { table } = require('table');
 const { servers } = require('../../bot-config.json');
 
@@ -8,7 +8,9 @@ const dockerHelper = require('../../docker-helper.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('serverlist')
-    .setDescription('View the status of the available servers'),
+    .setDescription('View the status of the available servers')
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .setDMPermission(false),
   async execute(interaction) {
     // fetch servers from configuration JSON that are enabled
     var enabledServers = servers.filter(x => x.enabled === true);
