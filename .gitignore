@@ -129,5 +129,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-bot-config-test.json
-token-config-test.json
+bot-config-*.json
+token-config-*.json
