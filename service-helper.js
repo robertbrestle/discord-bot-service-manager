@@ -21,7 +21,9 @@ function getServiceStatus(name, detailed) {
     if (commandResult.stderr.length > 0)
       return commandResult.stderr;
     else
-      return commandResult.stdout.replace(/^\s*Active:\s/, "");
+      return commandResult.stdout
+        .replace(/^\s*Active:\s/, '') // grab correct section
+        .replace(/\n$/, ''); // remove trailing newline
   }
   else // else return short result
   {

@@ -41,7 +41,9 @@ module.exports = {
       // set to defer for long-running operations
       await interaction.deferReply();
       
+      // TODO: change to object with success/status/message/etc
       var result = '';
+
       // perform action based on type
       switch (foundServers[0].type) {
         case 'docker':
@@ -55,9 +57,11 @@ module.exports = {
           break;
       }
 
-      // if start or status action, append IP + port
+      // if start or status action, show description with substituted values
       if (action === "start" || action === "status") {
-        result += `\nAddress:  **${await publicIp()}:${foundServers[0].port}**`;
+        result += '\n' + foundServers[0].description
+          .replace('[IP]', await publicIp())
+          .replace('[PORT]', foundServers[0].port);
       }
 
       // edit the reply with the result
