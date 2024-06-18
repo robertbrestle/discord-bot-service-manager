@@ -27,5 +27,19 @@
         { "name": "Start", "value": "start", "successMessage": "started" },
         { "name": "Stop", "value": "stop", "successMessage": "stopped" },
         { "name": "Restart", "value": "restart", "successMessage": "restarted" }
+    ],
+    "logs": [
+        {
+            "name": "SHAllenge results",
+            "value": "/home/test/guid.log",
+            "type": "shallenge",
+            "enabled": true
+        },
+        {
+            "name": "Apache2",
+            "value": "/var/log/apache2/error.log",
+            "type": "log",
+            "enabled": true
+        }
     ]
 }
